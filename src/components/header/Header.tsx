@@ -5,14 +5,19 @@ import { useSelector } from 'react-redux';
 import {RootState} from '../../redux/reducer/index'
 import { EnumHomeMenu } from '../../enum/homeMenu';
 import { menuChange } from '../../redux/action/menu_change';
+import { debounceFunction } from '../../tools/debounce';
+import { throttle } from '../../tools/throttle';
+import { getMenuIndex } from '../../tools/getMenuIndex';
+
 
 const Header = () =>{
     const dispatch = useDispatch();
-    const temp = useSelector((state:RootState)=> state.generalState);
-    const [curMenu, setCurMenu] = useState<EnumHomeMenu>(EnumHomeMenu.HOME);
+    const curMenu = useSelector((state:RootState)=> state.generalState.menu);
     const [windowSize, setWindowSize] = useState<number>(window.innerWidth);
     const [curMenuPos, setCurMenuPos] = useState<number>(1);
     const [curMenuSize, setCurMenuSize] = useState<number>(50);
+
+
 
     useEffect(() => {
         const updateWindowDimensions = () => {
@@ -27,11 +32,13 @@ const Header = () =>{
       }, []);
     
     
+    useEffect(()=>{
+        setCurMenuPos(getMenuIndex(curMenu) + 1);
+    },[curMenu]);
     
     const selectMenu = (selectedMenu : EnumHomeMenu, event : React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         if(curMenu === selectedMenu)    return;
 
-        setCurMenu(selectedMenu)
         dispatch(menuChange(selectedMenu));
         let pos;
         switch(selectedMenu) {
@@ -51,9 +58,10 @@ const Header = () =>{
             <div className='protofiloTitle center'>PROTOFILO.</div>
             <div className='headerContents'>
                 <div className='indecator' style={{
-                    left : ((window.innerWidth * 0.6 - 500)/6 * curMenuPos) + 100 * (curMenuPos - 1) + 50, 
+                    left : ((windowSize * 0.6 - 500)/6 * curMenuPos) + 100 * (curMenuPos - 1) + 50, 
                     width: curMenuSize, 
-                    transform: `translateX(${-curMenuSize/2}px)`}}/>
+                    transform: `translateX(${-curMenuSize/2}px)`,
+                    }}/>
                 <div className='content center'><p onClick={(e)=> selectMenu(EnumHomeMenu.HOME,e)} className='contentText'>HOME</p></div>
                 <div className='content center'><p onClick={(e)=> selectMenu(EnumHomeMenu.ABOUT,e)} className='contentText'>ABOUT</p></div>
                 <div className='content center'><p onClick={(e)=> selectMenu(EnumHomeMenu.WORKS,e)} className='contentText'>WORKS</p></div>

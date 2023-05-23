@@ -1,0 +1,40 @@
+ .homePageLayout{
+    position: relative;
+    width: 100vw;
+    height: calc(100vh - 80px);
+    margin-top: 80px;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    overflow-x: hidden;
+ }
+.homePageContainer{
+
+}
+ .firstScreen{
+    box-sizing: border-box;
+    width: 100vw;
+    height: calc(100vh - 80px);
+    display: flex;
+ }
+ .leftSection{
+    width: 40vw;
+    height: calc(100vh - 80px);
+    background-color: var(--vt-c-black);
+ }
+ .rightSection{
+    box-sizing: border-box;
+    width: 60vw;
+    height: calc(100vh - 80px);
+ }
+ .rightSection img{
+    box-sizing: border-box;
+    height: calc(100vh - 80px);
+    width: 100%;
+    object-fit : cover;
+ }
+ .secondScreen{
+    box-sizing: border-box;
+    width: 100vw;
+    height: calc(100vh - 80px);
+    display: flex;
+ }
