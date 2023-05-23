@@ -13,17 +13,18 @@
  .firstScreen{
     box-sizing: border-box;
     width: 100vw;
+    min-width: 900px;
     height: calc(100vh - 80px);
     display: flex;
  }
  .leftSection{
-    width: 40vw;
+    width: 40%;
     height: calc(100vh - 80px);
     background-color: var(--vt-c-black);
  }
  .rightSection{
     box-sizing: border-box;
-    width: 60vw;
+    width: 60%;
     height: calc(100vh - 80px);
  }
  .rightSection img{

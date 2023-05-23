@@ -40,16 +40,8 @@ const Header = () =>{
         if(curMenu === selectedMenu)    return;
 
         dispatch(menuChange(selectedMenu));
-        let pos;
-        switch(selectedMenu) {
-            case EnumHomeMenu.HOME :    pos = 1; break;
-            case EnumHomeMenu.ABOUT :   pos = 2; break;
-            case EnumHomeMenu.WORKS :   pos = 3; break;
-            case EnumHomeMenu.BLOG :    pos = 4; break;
-            case EnumHomeMenu.CONTACT : pos = 5; break;
-        }
 
-        setCurMenuPos(pos);
+        setCurMenuPos(getMenuIndex(selectedMenu) + 1);
         setCurMenuSize(event.currentTarget.offsetWidth);
     }
 
@@ -58,7 +50,7 @@ const Header = () =>{
             <div className='protofiloTitle center'>PROTOFILO.</div>
             <div className='headerContents'>
                 <div className='indecator' style={{
-                    left : ((windowSize * 0.6 - 500)/6 * curMenuPos) + 100 * (curMenuPos - 1) + 50, 
+                    left : (((windowSize > 900 ? windowSize : 900 ) * 0.6 - 500)/6 * curMenuPos) + 100 * (curMenuPos - 1) + 50, 
                     width: curMenuSize, 
                     transform: `translateX(${-curMenuSize/2}px)`,
                     }}/>

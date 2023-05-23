@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 import { menuChange } from '../../redux/action/menu_change';
 import { nextMenu } from '../../tools/nextMenu';
 import { getMenu } from '../../tools/getMenu';
+import SecondPage from '../../components/secondPage/SecondPage';
 type homeProps = {
   
 };
@@ -17,7 +18,6 @@ const Home: React.FC<homeProps> = ({  }) => {
   const dispatch = useDispatch();
   const curMenu = useSelector((state : RootState)=>state.generalState.menu);
   const outerDivRef = useRef<HTMLDivElement>(null);
-  console.log(curMenu);
 
   useLayoutEffect(()=>{
     const windowHeight = window.innerHeight;
@@ -58,6 +58,7 @@ const Home: React.FC<homeProps> = ({  }) => {
           top: (windowHeight - 80) * (cur - 1),
           left: 0,
           behavior: "smooth",
+          
         });
       }
     };
@@ -80,7 +81,7 @@ const Home: React.FC<homeProps> = ({  }) => {
           </div>
         </div>
         <div className='secondScreen'>
-
+          <SecondPage/>
         </div>
         <div className='secondScreen'>
 
