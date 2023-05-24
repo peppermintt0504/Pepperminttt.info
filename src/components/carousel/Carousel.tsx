@@ -9,6 +9,7 @@ const Carousel = () =>{
     const dispatch = useDispatch();
     const temp = useSelector((state:RootState)=> state.generalState);
     const carouselRef = useRef<HTMLDivElement>(null);
+    const isMoving = useRef<Boolean>(false);
     const [index, setIndex] = useState<number>(0)
 
     const tempPhoto = [
@@ -20,7 +21,8 @@ const Carousel = () =>{
 
     console.log(index);
     const next = () =>{
-        if(!carouselRef.current)    return;
+        if(!carouselRef.current || isMoving.current)    return;
+        isMoving.current = true;
         carouselRef.current.style.transition = 'left 0.5s';
         carouselRef.current.style.left = '-560px';
         setTimeout(()=>{
@@ -30,10 +32,12 @@ const Carousel = () =>{
                 else    return pre + 1;
             });
             carouselRef.current!.style.left = '-280px';
+            isMoving.current = false;
         },500)
     }
     const before = () =>{
-        if(!carouselRef.current)    return;
+        if(!carouselRef.current || isMoving.current)    return;
+        isMoving.current = true;
         carouselRef.current.style.transition = 'left 0.5s';
         carouselRef.current.style.left = '0px';
         setTimeout(()=>{
@@ -43,6 +47,7 @@ const Carousel = () =>{
                 else    return pre - 1;
             });
             carouselRef.current!.style.left = '-280px';
+            isMoving.current = false;
         },500)
     }
 
