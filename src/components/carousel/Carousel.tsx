@@ -18,8 +18,14 @@ const Carousel = () =>{
         'https://openimage.interpark.com/goods_image_big/5/2/5/7/8101415257_l.jpg',
 
     ]
+    useEffect(()=>{
+        //image preload
+        tempPhoto.map(image => {
+            const img = new Image()
+            img.src = image;
+        })
+    },[])
 
-    console.log(index);
     const next = () =>{
         if(!carouselRef.current || isMoving.current)    return;
         isMoving.current = true;
@@ -31,8 +37,11 @@ const Carousel = () =>{
                 if(pre === tempPhoto.length - 1)    return 0;
                 else    return pre + 1;
             });
-            carouselRef.current!.style.left = '-280px';
+            setTimeout(()=>{
+                carouselRef.current!.style.left = '-280px';
             isMoving.current = false;
+            },10)
+            
         },500)
     }
     const before = () =>{
