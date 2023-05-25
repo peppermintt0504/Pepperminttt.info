@@ -21,6 +21,7 @@ const FirstPage = () =>{
                 <div className='secondTitleText'>개발자 유동건의 개인 페이지입니다.</div>
                 </div>
             {/* <div className='thirdTitleText'>해당 페이지는 외부 라이브러리를 최소로 사용하여 개발하였습니다.</div> */}
+            <div className='navigator'></div>
         </div>
     )
 }

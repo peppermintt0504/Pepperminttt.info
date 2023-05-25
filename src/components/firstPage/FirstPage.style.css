@@ -46,3 +46,13 @@
 
     }
 }
+
+.navigator{
+    position: absolute;
+    width: 50px;
+    height: 100px;
+    border-radius: 25px;
+    bottom: 50px;
+    left : calc(50% - 25px);
+    background-color: black;
+}
