@@ -11,11 +11,9 @@
 
 }
  .firstScreen{
-    box-sizing: border-box;
     width: 100vw;
     min-width: 900px;
     height: calc(100vh - 80px);
-    display: flex;
  }
  .leftSection{
     width: 40%;

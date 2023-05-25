@@ -10,6 +10,7 @@ import { menuChange } from '../../redux/action/menu_change';
 import { nextMenu } from '../../tools/nextMenu';
 import { getMenu } from '../../tools/getMenu';
 import SecondPage from '../../components/secondPage/SecondPage';
+import FirstPage from '../../components/firstPage/FirstPage';
 type homeProps = {
   
 };
@@ -73,12 +74,8 @@ const Home: React.FC<homeProps> = ({  }) => {
     <div className='homePageContainer'>
       <Header/>
       <div ref={outerDivRef} className='homePageLayout'>
-        {/* <Carousel/> */}
         <div className='firstScreen'>
-          <div className='leftSection'></div>
-          <div className='rightSection'>
-            <img src={require('../../asset/mainPhoto.jpg')}/>
-          </div>
+          <FirstPage/>
         </div>
         <div className='secondScreen'>
           <SecondPage/>

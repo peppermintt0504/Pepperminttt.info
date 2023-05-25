@@ -1,0 +1,48 @@
+.firstPageLayout{
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+.MainTitle{
+    position: absolute;
+    color: var(--vt-c-white-soft);
+    bottom: 30%;
+    left: 7%;
+}
+
+.mainTitleText{
+    font-family: GmarketSansTTFBold;
+    font-size: 80px;
+    opacity: 0;
+    animation-name: appear;
+    animation-duration: 2s;
+    animation-delay: 1s;
+    animation-fill-mode: forwards;
+}
+.secondTitleText{
+    font-size: 30px;
+    opacity: 0;
+    animation-name: appear;
+    animation-duration: 2s;
+    animation-delay: 2.5s;
+    animation-fill-mode: forwards;
+}
+.thirdTitleText{
+    position: absolute;
+    color: var(--vt-c-white-soft);
+    bottom: 5%;
+    left: 2%;   
+    font-size: 20px;
+}
+@keyframes appear {
+    0%{
+        opacity: 0;
+        transform: translateY(100px);
+    }
+    100%{
+        opacity: 1;
+        transform: translateY(0px);
+
+    }
+}
