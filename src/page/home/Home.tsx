@@ -18,7 +18,7 @@ const Home: React.FC<homeProps> = ({  }) => {
   const dispatch = useDispatch();
   const curMenu = useSelector((state : RootState)=>state.generalState.menu);
   const outerDivRef = useRef<HTMLDivElement>(null);
-
+  const isScrolling = useRef<Boolean>(false);
   useLayoutEffect(()=>{
     const windowHeight = window.innerHeight;
 
