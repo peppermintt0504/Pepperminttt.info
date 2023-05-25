@@ -10,6 +10,7 @@ const Carousel = () =>{
     const temp = useSelector((state:RootState)=> state.generalState);
     const carouselRef = useRef<HTMLDivElement>(null);
     const isMoving = useRef<Boolean>(false);
+    const [reload, setReload] = useState<Boolean>(false)
     const [index, setIndex] = useState<number>(0)
 
     const tempPhoto = [
@@ -37,12 +38,14 @@ const Carousel = () =>{
                 if(pre === tempPhoto.length - 1)    return 0;
                 else    return pre + 1;
             });
-            setTimeout(()=>{
-                carouselRef.current!.style.left = '-280px';
-            isMoving.current = false;
-            },10)
+            setReload(true);
             
         },500)
+        setTimeout(()=>{
+            carouselRef.current!.style.left = '-280px';
+            setReload(false);
+            isMoving.current = false;
+        },510)
     }
     const before = () =>{
         if(!carouselRef.current || isMoving.current)    return;
@@ -55,9 +58,14 @@ const Carousel = () =>{
                 if(pre === 0)    return tempPhoto.length - 1;
                 else    return pre - 1;
             });
-            carouselRef.current!.style.left = '-280px';
-            isMoving.current = false;
+            setReload(true);
+            
         },500)
+        setTimeout(()=>{
+            carouselRef.current!.style.left = '-280px';
+            setReload(false);
+            isMoving.current = false;
+        },510)
     }
 
     return (
@@ -68,13 +76,13 @@ const Carousel = () =>{
             <div className='photo'>
                 <div ref={carouselRef} className='carousel'>
                     <div className='carouselImg'>
-                        <img src={index === 0 ? tempPhoto[tempPhoto.length - 1] :tempPhoto[index - 1]}></img>
+                        <img src={reload ? tempPhoto[index] : index === 0 ? tempPhoto[tempPhoto.length - 1] :tempPhoto[index - 1]}></img>
                     </div>
                     <div className='carouselImg'>
                         <img src={tempPhoto[index]}></img>
                     </div>
                     <div className='carouselImg'>
-                        <img src={index === tempPhoto.length - 1 ? tempPhoto[0] :tempPhoto[index + 1]}></img>
+                        <img src={reload ? tempPhoto[index] :index === tempPhoto.length - 1 ? tempPhoto[0] :tempPhoto[index + 1]}></img>
                     </div>
                     
                 </div>
