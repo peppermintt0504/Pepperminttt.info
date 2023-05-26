@@ -31,14 +31,16 @@ const Home: React.FC<homeProps> = ({  }) => {
       behavior: "smooth",
     });
     if(scrollbarRef.current){
-      scrollbarRef.current.style.width = '12px';
+      scrollbarRef.current.style.width = '10px';
       scrollbarRef.current.style.top = `calc((100vh - 80px) / 5 * ${getMenuIndex(curMenu)})`;
-      scrollbarRef.current.style.opacity = '0.6';
+      scrollbarRef.current.style.opacity = '0.4';
+      scrollbarRef.current.style.borderRadius = '5px';
       setTimeout(()=>{
         if(scrollbarRef.current){
           scrollbarRef.current.style.width = '';
           scrollbarRef.current.style.opacity = '';
-        }
+          scrollbarRef.current.style.borderRadius = '';
+        } 
       },500)
     }
   },[curMenu]);

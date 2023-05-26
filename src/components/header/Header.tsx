@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import "./Header.style.css"
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
@@ -16,7 +16,7 @@ const Header = () =>{
     const [windowSize, setWindowSize] = useState<number>(window.innerWidth);
     const [curMenuPos, setCurMenuPos] = useState<number>(1);
     const [curMenuSize, setCurMenuSize] = useState<number>(50);
-
+    const refArr = useRef<null[] | HTMLDivElement[]>([]);
 
 
     useEffect(() => {
@@ -34,6 +34,8 @@ const Header = () =>{
     
     useEffect(()=>{
         setCurMenuPos(getMenuIndex(curMenu) + 1);
+        setCurMenuSize(refArr.current[getMenuIndex(curMenu)]!.offsetWidth);
+
     },[curMenu]);
     
     const selectMenu = (selectedMenu : EnumHomeMenu, event : React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -54,11 +56,11 @@ const Header = () =>{
                     width: curMenuSize, 
                     transform: `translateX(${-curMenuSize/2}px)`,
                     }}/>
-                <div className='content center'><p onClick={(e)=> selectMenu(EnumHomeMenu.HOME,e)} className='contentText'>HOME</p></div>
-                <div className='content center'><p onClick={(e)=> selectMenu(EnumHomeMenu.ABOUT,e)} className='contentText'>ABOUT</p></div>
-                <div className='content center'><p onClick={(e)=> selectMenu(EnumHomeMenu.WORKS,e)} className='contentText'>WORKS</p></div>
-                <div className='content center'><p onClick={(e)=> selectMenu(EnumHomeMenu.BLOG,e)} className='contentText'>BLOG</p></div>
-                <div className='content center'><p onClick={(e)=> selectMenu(EnumHomeMenu.CONTACT,e)} className='contentText'>CONTACT</p></div>
+                <div className='content center'><p ref={(e)=>refArr.current[0] = e} onClick={(e)=> selectMenu(EnumHomeMenu.HOME,e)} className='contentText'>HOME</p></div>
+                <div className='content center'><p ref={(e)=>refArr.current[1] = e} onClick={(e)=> selectMenu(EnumHomeMenu.ABOUT,e)} className='contentText'>ABOUT</p></div>
+                <div className='content center'><p ref={(e)=>refArr.current[2] = e} onClick={(e)=> selectMenu(EnumHomeMenu.WORKS,e)} className='contentText'>WORKS</p></div>
+                <div className='content center'><p ref={(e)=>refArr.current[3] = e} onClick={(e)=> selectMenu(EnumHomeMenu.BLOG,e)} className='contentText'>BLOG</p></div>
+                <div className='content center'><p ref={(e)=>refArr.current[4] = e} onClick={(e)=> selectMenu(EnumHomeMenu.CONTACT,e)} className='contentText'>CONTACT</p></div>
             </div>
         </div>
     )
