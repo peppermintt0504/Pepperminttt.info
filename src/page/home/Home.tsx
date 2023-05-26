@@ -13,6 +13,7 @@ import SecondPage from '../../components/secondPage/SecondPage';
 import FirstPage from '../../components/firstPage/FirstPage';
 import ThirdPage from '../../components/thirdPage/ThirdPage';
 import FivthPage from '../../components/fivthPage/FivthPage';
+import FourthPage from '../../components/fourthPage/FourthPage';
 type homeProps = {
   
 };
@@ -23,6 +24,7 @@ const Home: React.FC<homeProps> = ({  }) => {
   const outerDivRef = useRef<HTMLDivElement>(null);
   const scrollbarRef = useRef<HTMLDivElement>(null);
   const holdScrolling = useRef<Boolean>(false);
+  const scrolling = useRef<Boolean>(false);
   useLayoutEffect(()=>{
     const windowHeight = window.innerHeight;
 
@@ -49,25 +51,21 @@ const Home: React.FC<homeProps> = ({  }) => {
   useLayoutEffect(() => {
     const wheelHandler = (e: WheelEvent) => {
       e.preventDefault();
-      if(!outerDivRef.current || holdScrolling.current) return
+      if(!outerDivRef.current || holdScrolling.current || scrolling.current) return
       const { deltaY } = e;
       const windowHeight = window.innerHeight;
 
       const cur = Math.round(outerDivRef.current.scrollTop / (windowHeight - 83));
       if(deltaY > 0){ //스크롤 내릴 떄
         if(cur === 4)  return;
-
+        scrolling.current = true;
         dispatch(menuChange(getMenu(cur + 1)));
-
-
-  
-
+        setTimeout(()=>{scrolling.current=false},500);
       }else{          //스크롤 올릴 떄
         if(cur === 0)  return;
-        
+        scrolling.current = true;
         dispatch(menuChange(getMenu(cur - 1)));
-
-      
+        setTimeout(()=>{scrolling.current=false},500);
       }
     };
     const outerDivRefCurrent = outerDivRef.current;
@@ -91,7 +89,7 @@ const Home: React.FC<homeProps> = ({  }) => {
           <ThirdPage scrollEvent={holdScrolling}/>
         </div>
         <div className='secondScreen'>
-
+          <FourthPage/>
         </div>
         <div className='secondScreen'>
           <FivthPage/>
