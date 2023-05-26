@@ -11,6 +11,7 @@ import { nextMenu } from '../../tools/nextMenu';
 import { getMenu } from '../../tools/getMenu';
 import SecondPage from '../../components/secondPage/SecondPage';
 import FirstPage from '../../components/firstPage/FirstPage';
+import ThirdPage from '../../components/thirdPage/ThirdPage';
 type homeProps = {
   
 };
@@ -19,7 +20,7 @@ const Home: React.FC<homeProps> = ({  }) => {
   const dispatch = useDispatch();
   const curMenu = useSelector((state : RootState)=>state.generalState.menu);
   const outerDivRef = useRef<HTMLDivElement>(null);
-  const isScrolling = useRef<Boolean>(false);
+  const holdScrolling = useRef<Boolean>(false);
   useLayoutEffect(()=>{
     const windowHeight = window.innerHeight;
 
@@ -32,8 +33,8 @@ const Home: React.FC<homeProps> = ({  }) => {
 
   useLayoutEffect(() => {
     const wheelHandler = (e: WheelEvent) => {
-      e.preventDefault();
-      if(!outerDivRef.current) return
+      // e.preventDefault();
+      if(!outerDivRef.current || holdScrolling.current) return
       const { deltaY } = e;
       const windowHeight = window.innerHeight;
 
@@ -81,7 +82,7 @@ const Home: React.FC<homeProps> = ({  }) => {
           <SecondPage/>
         </div>
         <div className='secondScreen'>
-
+          <ThirdPage scrollEvent={holdScrolling}/>
         </div>
         <div className='secondScreen'>
 
