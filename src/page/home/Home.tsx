@@ -20,6 +20,7 @@ const Home: React.FC<homeProps> = ({  }) => {
   const dispatch = useDispatch();
   const curMenu = useSelector((state : RootState)=>state.generalState.menu);
   const outerDivRef = useRef<HTMLDivElement>(null);
+  const scrollbarRef = useRef<HTMLDivElement>(null);
   const holdScrolling = useRef<Boolean>(false);
   useLayoutEffect(()=>{
     const windowHeight = window.innerHeight;
@@ -29,11 +30,22 @@ const Home: React.FC<homeProps> = ({  }) => {
       left: 0,
       behavior: "smooth",
     });
+    if(scrollbarRef.current){
+      scrollbarRef.current.style.width = '12px';
+      scrollbarRef.current.style.top = `calc((100vh - 80px) / 5 * ${getMenuIndex(curMenu)})`;
+      scrollbarRef.current.style.opacity = '0.6';
+      setTimeout(()=>{
+        if(scrollbarRef.current){
+          scrollbarRef.current.style.width = '';
+          scrollbarRef.current.style.opacity = '';
+        }
+      },500)
+    }
   },[curMenu]);
 
   useLayoutEffect(() => {
     const wheelHandler = (e: WheelEvent) => {
-      // e.preventDefault();
+      e.preventDefault();
       if(!outerDivRef.current || holdScrolling.current) return
       const { deltaY } = e;
       const windowHeight = window.innerHeight;
@@ -45,23 +57,14 @@ const Home: React.FC<homeProps> = ({  }) => {
         dispatch(menuChange(getMenu(cur + 1)));
 
 
-        outerDivRef.current?.scrollTo({
-          top: (windowHeight - 80) * (cur + 1),
-          left: 0,
-          behavior: "smooth",
-        });
+  
 
       }else{          //스크롤 올릴 떄
         if(cur === 0)  return;
         
         dispatch(menuChange(getMenu(cur - 1)));
 
-        outerDivRef.current?.scrollTo({
-          top: (windowHeight - 80) * (cur - 1),
-          left: 0,
-          behavior: "smooth",
-          
-        });
+      
       }
     };
     const outerDivRefCurrent = outerDivRef.current;
@@ -91,6 +94,7 @@ const Home: React.FC<homeProps> = ({  }) => {
 
         </div>
       </div>
+      <div className='scrollbarContainer'><div ref={scrollbarRef} className='scrollbar'></div></div>
     </div>
   );
 }
