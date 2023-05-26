@@ -10,15 +10,21 @@ const Carousel = () =>{
     const temp = useSelector((state:RootState)=> state.generalState);
     const carouselRef = useRef<null[] | HTMLDivElement[]>([]);
     const isMoving = useRef<Boolean>(false);
+    const [autoPlay, setAutoPlay] = useState<Boolean>(true)
     const [reload, setReload] = useState<Boolean>(false)
     const [index, setIndex] = useState<number>(0)
 
     const tempPhoto = [
-        'https://blog.kakaocdn.net/dn/yDtgP/btrJaVA4iLN/9QtVWLrCIrUtDz7U4Udsr0/img.jpg',
-        'https://mblogthumb-phinf.pstatic.net/MjAyMTAyMDRfNjIg/MDAxNjEyNDA4OTk5NDQ4.6UGs399-0EXjIUwwWsYg7o66lDb-MPOVQ-zNDy1Wnnkg.m-WZz0IKKnc5OO2mjY5dOD-0VsfpXg7WVGgds6fKwnIg.JPEG.sunny_side_up12/1612312679152%EF%BC%8D2.jpg?type=w800',
-        'https://mblogthumb-phinf.pstatic.net/MjAyMjAxMjVfMjAy/MDAxNjQzMTAyOTk2NjE0.gw_H_jjBM64svaftcnheR6-mHHlmGOyrr6htAuxPETsg.8JJSQNEA5HX2WmrshjZ-VjmJWqhmgE40Qm5csIud9VUg.JPEG.minziminzi128/IMG_7374.JPG?type=w800',
-        'https://djpms9a1go7nf.cloudfront.net/prod/uploads/thumbnail/images/10043263/167100535142741_md.png',
-        'https://image.musinsa.com/mfile_s01/2022/04/05/8e78082b9922dd076806a39073c8615c215014.jpg',
+        require('../../asset/photo1.jpg'),
+        require('../../asset/photo2.jpg'),
+        require('../../asset/photo3.webp'),
+        require('../../asset/photo4.jpg'),
+        require('../../asset/photo5.jpg'),
+        // 'https://blog.kakaocdn.net/dn/yDtgP/btrJaVA4iLN/9QtVWLrCIrUtDz7U4Udsr0/img.jpg',
+        // 'https://mblogthumb-phinf.pstatic.net/MjAyMTAyMDRfNjIg/MDAxNjEyNDA4OTk5NDQ4.6UGs399-0EXjIUwwWsYg7o66lDb-MPOVQ-zNDy1Wnnkg.m-WZz0IKKnc5OO2mjY5dOD-0VsfpXg7WVGgds6fKwnIg.JPEG.sunny_side_up12/1612312679152%EF%BC%8D2.jpg?type=w800',
+        // 'https://mblogthumb-phinf.pstatic.net/MjAyMjAxMjVfMjAy/MDAxNjQzMTAyOTk2NjE0.gw_H_jjBM64svaftcnheR6-mHHlmGOyrr6htAuxPETsg.8JJSQNEA5HX2WmrshjZ-VjmJWqhmgE40Qm5csIud9VUg.JPEG.minziminzi128/IMG_7374.JPG?type=w800',
+        // 'https://djpms9a1go7nf.cloudfront.net/prod/uploads/thumbnail/images/10043263/167100535142741_md.png',
+        // 'https://image.musinsa.com/mfile_s01/2022/04/05/8e78082b9922dd076806a39073c8615c215014.jpg',
     ]
     useEffect(()=>{
         //image preload
@@ -26,7 +32,19 @@ const Carousel = () =>{
             const img = new Image()
             img.src = image;
         })
+        
     },[])
+    useEffect(()=>{
+        
+        let autoplayFunc = setInterval(() => {
+            next(); 
+        }, 3000);
+        if(!autoPlay){
+            clearInterval(autoplayFunc);
+        }
+
+        return () => clearInterval(autoplayFunc);
+    },[autoPlay])
 
     const next = () =>{
         if(!carouselRef.current || isMoving.current)    return;
@@ -91,6 +109,7 @@ const Carousel = () =>{
         <div className='carouselLayout'>
             <div onClick={before} className='leftBTN'><img className='BTNImage' src={require('../../asset/left-arrow.png')}/></div>
             <div onClick={next} className='rightBTN'><img className='BTNImage' src={require('../../asset/right-arrow.png')}/></div>
+            <div onClick={()=>{setAutoPlay((pre)=>!pre)}} style={{opacity: autoPlay ? 0.7 : 0.3}} className='autoPlayBTN'>AutoPlay</div>
             
             <div className='photo'>
                 <div ref={(element) => carouselRef.current[0] = element} className='carousel'>

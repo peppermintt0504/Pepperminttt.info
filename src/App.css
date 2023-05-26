@@ -1,6 +1,10 @@
 *{
   box-sizing: border-box;
   font-family : 'GmarketSansTTFMedium';
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none
 }
 .center {
   display: flex;
