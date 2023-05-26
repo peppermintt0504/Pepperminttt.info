@@ -12,6 +12,7 @@ import { getMenu } from '../../tools/getMenu';
 import SecondPage from '../../components/secondPage/SecondPage';
 import FirstPage from '../../components/firstPage/FirstPage';
 import ThirdPage from '../../components/thirdPage/ThirdPage';
+import FivthPage from '../../components/fivthPage/FivthPage';
 type homeProps = {
   
 };
@@ -93,7 +94,7 @@ const Home: React.FC<homeProps> = ({  }) => {
 
         </div>
         <div className='secondScreen'>
-
+          <FivthPage/>
         </div>
       </div>
       <div className='scrollbarContainer'><div ref={scrollbarRef} className='scrollbar'></div></div>
