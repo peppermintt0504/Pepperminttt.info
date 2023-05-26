@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import "./FirstPage.style.css"
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
@@ -11,28 +11,18 @@ import { getMenu } from '../../tools/getMenu';
 const FirstPage = () =>{
     const dispatch = useDispatch();
     const temp = useSelector((state:RootState)=> state.generalState);
+    const [init,setInit] = useState<Boolean>(false)
     const scrollDown = () => {
         dispatch(menuChange(getMenu(1)));
     }
+    useLayoutEffect(()=>{setTimeout(()=>{setInit(true)},3000)},[])
     return (
         <div className='firstPageLayout'>
             <div className='leftSection'>
                 <div className='decoration'>
-                    <div className='line'>
+                    {[0,0,0,0,0].map(()=> <div className='line'>
                         {[0,0,0,0,0].map(()=> <div className='spot'></div>)}
-                    </div>
-                    <div className='line'>
-                        {[0,0,0,0,0].map(()=> <div className='spot'></div>)}
-                    </div>
-                    <div className='line'>
-                        {[0,0,0,0,0].map(()=> <div className='spot'></div>)}
-                    </div>
-                    <div className='line'>
-                        {[0,0,0,0,0].map(()=> <div className='spot'></div>)}
-                    </div>
-                    <div className='line'>
-                        {[0,0,0,0,0].map(()=> <div className='spot'></div>)}
-                    </div>
+                    </div>)}
                 </div>
             </div>
             <div className='rightSection'>
@@ -43,7 +33,7 @@ const FirstPage = () =>{
                 <div className='secondTitleText'>개발자 유동건의 개인 페이지입니다.</div>
                 </div>
             {/* <div className='thirdTitleText'>해당 페이지는 외부 라이브러리를 최소로 사용하여 개발하였습니다.</div> */}
-            <div onClick={scrollDown} className='navigator'>
+            <div style={{opacity : init ? '' : 0}} onClick={scrollDown} className='navigator'>
                 <img src={require('../../asset/down-arrow.png')} className='downArrow'/>
                 <img src={require('../../asset/down-arrow.png')} className='downArrow'/>
                 <img src={require('../../asset/down-arrow.png')} className='downArrow'/>

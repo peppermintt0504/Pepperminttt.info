@@ -99,9 +99,10 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    transition: all 0.5s;
     align-items: center;
     animation-name: bounce;
-    animation-delay: 1s;
+    animation-delay: 3s;
     animation-duration: 2.5s;
     animation-iteration-count: infinite;
     cursor: pointer;

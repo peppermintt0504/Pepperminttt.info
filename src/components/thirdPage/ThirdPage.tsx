@@ -26,7 +26,14 @@ const ThirdPage = ({scrollEvent}: any) =>{
         setHoverIndex(-1);
     }
     return (
-        <div className='thirdPageLayout '>
+        <div className='thirdPageLayout'>
+            {/* <div className='deco'>
+                {[0,0,0,0,0].map(()=>
+                    <div className='line'>
+                        {[0,0,0,0,0].map(()=> <div className='spot'></div>)}
+                    </div>
+                )}
+            </div> */}
             <div className='Title'>
                 <div className='underLine'/>
                 <div className='titleText'>My Experience</div>
@@ -34,7 +41,6 @@ const ThirdPage = ({scrollEvent}: any) =>{
             <div className='contentContainer'>
                 <div className='contentRow'>
                     {myWorkList.map((x,i)=>{
-                        if(i > 2)   return;
                         return(
                             <div className='contentCard' >
                             <img className='cardImage' 
@@ -59,33 +65,6 @@ const ThirdPage = ({scrollEvent}: any) =>{
                     )}
                     
                 </div>
-                <div className='contentRow'>
-                {myWorkList.map((x,i)=>{
-                        if(i < 3)   return;
-                        return(
-                            <div className='contentCard' >
-                            <img className='cardImage'
-                                style={{transform : hoverIndex === i ? 'scale(1.05)' : ''}}
-                                src={require(`../../asset/${x.image}`)}/>
-                            <div className='cardHover' 
-                                style={{opacity : hoverIndex === i ? 0.9 : 0}} 
-                                onMouseOver={()=>hover(i)} 
-                                onMouseLeave={()=>releaseHover()}
-                            >
-                                <div className='title'>{x.name}</div>
-                                <div className='description'>{x.desc}</div>
-                                <div className='link'>
-                                    {x.git && <img onClick={()=>{ window.open(x.git, "_blank", "noopener, noreferrer");}} src={require("../../asset/gitIconWhite.png")}/>}
-                                    {x.notion && <img onClick={()=>{ window.open(x.notion, "_blank", "noopener, noreferrer");}} src={require("../../asset/notionIconWhite.png")}/>}
-                                    {x.link &&<img onClick={()=>{ window.open(x.link, "_blank", "noopener, noreferrer");}} src={require("../../asset/internetIconWhite.png")}/>}
-                                </div>
-                            </div>
-                        </div>
-                        )
-                    }
-                    )}
-                </div>
-                
             </div>  
         </div>
     )
