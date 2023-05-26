@@ -12,8 +12,8 @@ export const myWorkList : Iwork[] = [
     {
         name : 'Smilegate Stove Dev Camp',
         desc : "스마일게이트 스토브에서 진행한 실무체험형 인턴십 (메타버스 서비스 SGther Town 개발)",
-        git : 'https://github.com/peppermintt0504/SGather-Town',
-        notion : undefined,
+        git : undefined,
+        notion : 'https://spiritual-notebook-05f.notion.site/SGther-Town-7a01ddfd42a54691a35ae379f4169d61',
         link : undefined,
         image : 'SGDC.jpg',
     },
