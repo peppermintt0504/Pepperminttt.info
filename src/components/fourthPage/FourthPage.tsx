@@ -12,7 +12,7 @@ const FourthPage = ({scrollEvent}: any) =>{
 
     return (
         <div className='fourthPageLayout'>
-
+            <img src={require('../../asset/pngwing.com.png')} />
         </div>
     )
 }

@@ -5,7 +5,11 @@
     height: 100%;
     background-color: var(--vt-c-middleGrey);
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+.fourthPageLayout img{
+    width: 200px;
+
 }
