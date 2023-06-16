@@ -10,6 +10,7 @@ const FourthPage = ({scrollEvent}: any) =>{
     const temp = useSelector((state:RootState)=> state.generalState);
     const [hoverIndex,setHoverIndex] = useState<number>(-1);
 
+
     return (
         <div className='fourthPageLayout'>
             <img src={require('../../asset/pngwing.com.png')} />
